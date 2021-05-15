@@ -1,0 +1,10 @@
+{% extends "mixed_tasks_list_template.html" %}
+
+{% block arrows %}
+    {% if page > 1 %}
+        <a href="{{ url_for(current_page, p=page-1, query=search_string) }}"> << </a>
+    {% endif %}
+    {% if is_there_next_page %}
+        <a href="{{ url_for(current_page, p=page+1, query=search_string) }}"> >> </a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "main_template.html" %}
+
+{% block list %}
+    <ul>
+        {% for task in tasklist %}
+            {% if task.status == "new" %}
+                <li> {{ task.value }} <a href="{{ url_for('todo_list_app.complete_task_handle', task=task.id) }}"> Готово </a> </li>
+            {% else %}
+                <li> {{ task.value }} </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

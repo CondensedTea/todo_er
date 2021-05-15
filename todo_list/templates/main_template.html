@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo_er русский</title>
+</head>
+<body>
+    <h1>ToDo list</h1>
+    <form action="{{ url_for('todo_list_app.add_task_handle') }}">
+        <div>
+            <label for="desc">Добавить задачу: </label>
+            <input name="desc">
+            <button>Добавить</button>
+        </div>
+    </form>
+    <br>
+    <form action="{{ url_for('todo_list_app.search_task_handler', p=1) }}">
+        <div>
+            <label for="query">Найти задачу: </label>
+            <input name="query">
+            <button>Поиск</button>
+        </div>
+    </form>
+    <br>
+
+    <a href="{{ url_for('todo_list_app.tasks', state='new') }}">Новые задачи</a>
+    <a href="{{ url_for('todo_list_app.tasks', state='done') }}">Выполненные задачи</a>
+    <a href="{{ url_for('todo_list_app.tasks', state='all') }}">Все задачи</a>
+    {% block list %}
+    {% endblock %}
+    {% block arrows %}
+        {% if page > 1 %}
+            <a href="{{ url_for('todo_list_app.tasks', p=page-1, state=current_state) }}"> << </a>
+        {% endif %}
+        {% if is_there_next_page %}
+            <a href="{{ url_for('todo_list_app.tasks', p=page+1, state=current_state) }}"> >> </a>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>
